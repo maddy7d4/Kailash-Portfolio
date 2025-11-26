@@ -68,7 +68,7 @@ export function Header() {
                         >
                             {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
                         </button>
-                        <ThemeToggle />
+                        {/* <ThemeToggle /> */}
                     </div>
                 </div>
             </Container>

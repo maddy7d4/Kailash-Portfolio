@@ -1,5 +1,6 @@
 "use client"
 
+
 import { useEffect, useState, useRef } from "react"
 import { useScroll, useMotionValueEvent } from "framer-motion"
 import { useSoundContext } from "@/context/sound-context"
@@ -77,8 +78,6 @@ export function useScrollSound() {
     // Update oscillator type when profile changes
     useEffect(() => {
         if (oscillatorRef.current && audioContextRef.current) {
-            // Smooth transition for type change isn't directly supported, 
-            // but we can just switch it.
             oscillatorRef.current.type = activeProfile.type
         }
     }, [activeProfile])
@@ -90,8 +89,8 @@ export function useScrollSound() {
 
         const velocity = Math.abs(scrollY.getVelocity())
 
-        // Very low threshold for responsiveness
-        if (velocity > 1) {
+        // Increased threshold to prevent noise when stationary
+        if (velocity > 10) {
             // Map velocity to frequency range defined by profile
             // Use a logarithmic scale for more natural pitch changes
             const velocityFactor = Math.min(velocity / 2000, 1)
@@ -99,8 +98,8 @@ export function useScrollSound() {
             const frequency = activeProfile.minFreq + (freqRange * velocityFactor)
 
             // Volume based on velocity
-            // Smooth ramp up
-            const targetGain = Math.min(velocityFactor * 0.5 + 0.05, activeProfile.gain)
+            // Strictly proportional to velocity, no base floor
+            const targetGain = Math.min(velocityFactor * 0.8, activeProfile.gain)
 
             const now = audioContextRef.current.currentTime
             oscillatorRef.current.frequency.setTargetAtTime(frequency, now, 0.1)
@@ -111,10 +110,11 @@ export function useScrollSound() {
                 console.log(`Sound Active: Freq=${frequency.toFixed(0)}, Gain=${targetGain.toFixed(3)}`)
             }
         } else {
-            // Fade out when stopped
+            // Fade out quickly when stopped
             if (gainNodeRef.current) {
                 const now = audioContextRef.current.currentTime
-                gainNodeRef.current.gain.setTargetAtTime(0, now, 0.2)
+                // Faster fade out (0.1s)
+                gainNodeRef.current.gain.setTargetAtTime(0, now, 0.1)
             }
         }
     })
