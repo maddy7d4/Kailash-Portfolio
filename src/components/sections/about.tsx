@@ -25,7 +25,7 @@ export function About() {
                             <div className="relative w-full h-full rounded-xl overflow-hidden">
                                 <BlurFade delay={0.2} inView>
                                     <img
-                                        src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=1000&auto=format&fit=crop"
+                                        src="/kailas_profile.JPG"
                                         alt="Kailas"
                                         className="w-full h-full object-cover"
                                     />
