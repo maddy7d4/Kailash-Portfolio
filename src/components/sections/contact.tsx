@@ -54,7 +54,8 @@ export function Contact() {
             </Container>
 
             <footer className="absolute bottom-8 left-0 w-full text-center text-sm text-muted-foreground">
-                <p>© {new Date().getFullYear()} Kailas. All rights reserved.</p>
+                {/* <p>© {new Date().getFullYear()} Kailas. All rights reserved.</p> */}
+                <p>Crafted with ❤️ by Maddy</p>
             </footer>
         </section>
     )
