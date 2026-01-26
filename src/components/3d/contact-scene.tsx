@@ -24,7 +24,7 @@ function InteractiveShape() {
             onPointerOut={() => setHover(false)}
         >
             <MeshWobbleMaterial
-                color={hovered ? "#ffffff" : "#666666"}
+                color={hovered ? "#ffffff" : "#52525b"}
                 factor={1}
                 speed={2}
                 roughness={0.1}

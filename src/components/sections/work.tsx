@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef } from "react"
+import { useRef, useState, useEffect } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { Container } from "@/components/ui/container"
 import { ArrowUpRight } from "lucide-react"
@@ -10,47 +10,9 @@ import { ShinyText } from "@/components/ui/shiny-text"
 import { BlurFade } from "@/components/ui/blur-fade"
 import { BackgroundBeams } from "@/components/ui/background-beams"
 import { SoundTrigger } from "@/components/ui/sound-trigger"
+import type { Playlist } from "@/lib/db"
 
-const projects = [
-    {
-        id: 1,
-        title: "A Hyperlapse Exploration of Culture and Architecture",
-        category: "Hyperlapse",
-        description: "A journey through time and space, capturing the essence of cultural landmarks.",
-        color: "bg-zinc-900 dark:bg-zinc-900 bg-zinc-100",
-        image: "/hyperlapse_thumbnail.jpg",
-        link: "https://www.instagram.com/reel/DJeJj9LP6-7/?igsh=Z2lpNGxzbXVyOWpt"
-    },
-    {
-        id: 2,
-        title: "A Hyperlapse Exploration of Culture and Architecture",
-        category: "Hyperlapse",
-        description: "A journey through time and space, capturing the essence of cultural landmarks.",
-        color: "bg-zinc-800 dark:bg-zinc-800 bg-zinc-200",
-        image: "/hyperlapse_thumbnail.jpg",
-        link: "https://www.instagram.com/reel/DJeJj9LP6-7/?igsh=Z2lpNGxzbXVyOWpt"
-    },
-    {
-        id: 3,
-        title: "A Hyperlapse Exploration of Culture and Architecture",
-        category: "Hyperlapse",
-        description: "A journey through time and space, capturing the essence of cultural landmarks.",
-        color: "bg-zinc-900 dark:bg-zinc-900 bg-zinc-100",
-        image: "/hyperlapse_thumbnail.jpg",
-        link: "https://www.instagram.com/reel/DJeJj9LP6-7/?igsh=Z2lpNGxzbXVyOWpt"
-    },
-    {
-        id: 4,
-        title: "A Hyperlapse Exploration of Culture and Architecture",
-        category: "Hyperlapse",
-        description: "A journey through time and space, capturing the essence of cultural landmarks.",
-        color: "bg-zinc-800 dark:bg-zinc-800 bg-zinc-200",
-        image: "/hyperlapse_thumbnail.jpg",
-        link: "https://www.instagram.com/reel/DJeJj9LP6-7/?igsh=Z2lpNGxzbXVyOWpt"
-    },
-]
-
-function Card({ project, index, range, targetScale }: any) {
+function Card({ playlist, index, range, targetScale }: { playlist: Playlist; index: number; range: any; targetScale: number }) {
     const container = useRef(null)
     const { scrollYProgress } = useScroll({
         target: container,
@@ -59,25 +21,33 @@ function Card({ project, index, range, targetScale }: any) {
 
     const imageScale = useTransform(scrollYProgress, [0, 1], [2, 1])
     const scale = useTransform(range, [0, 1], [1, targetScale])
+    
+    const colors = [
+        "bg-zinc-900 dark:bg-zinc-900 bg-zinc-100",
+        "bg-zinc-800 dark:bg-zinc-800 bg-zinc-200",
+    ]
+    const color = colors[index % colors.length]
 
     return (
         <div ref={container} className="h-screen flex items-center justify-center sticky top-0">
             <motion.div
                 style={{ scale, top: `calc(-5vh + ${index * 25}px)` }}
-                className={`relative flex flex-col w-[1000px] h-[500px] rounded-3xl p-12 origin-top ${project.color} border border-white/10 shadow-2xl overflow-hidden`}
+                className={`relative flex flex-col w-[1000px] h-[500px] rounded-3xl p-12 origin-top ${color} border border-white/10 shadow-2xl overflow-hidden`}
             >
                 <BorderBeam size={250} duration={12} delay={9} />
 
                 <div className="flex flex-col h-full justify-between z-10">
                     <div className="flex justify-between items-center">
-                        <h3 className="text-4xl font-bold text-foreground">{project.title}</h3>
-                        <span className="text-xl text-muted-foreground">{project.category}</span>
+                        <h3 className="text-4xl font-bold text-foreground">{playlist.title}</h3>
+                        <span className="text-xl text-muted-foreground">{playlist.videos.length} Videos</span>
                     </div>
 
                     <div className="flex justify-between items-end">
-                        <p className="text-lg text-foreground/80 max-w-md">{project.description}</p>
-                        <Link href={project.link} target="_blank" className="flex items-center gap-2 text-foreground hover:underline">
-                            View Project <ArrowUpRight className="w-5 h-5" />
+                        <p className="text-lg text-foreground/80 max-w-md">
+                            A curated collection of {playlist.videos.length} video{playlist.videos.length !== 1 ? 's' : ''}
+                        </p>
+                        <Link href={`/playlist/${playlist.id}`} className="flex items-center gap-2 text-foreground hover:underline">
+                            View Playlist <ArrowUpRight className="w-5 h-5" />
                         </Link>
                     </div>
                 </div>
@@ -86,8 +56,8 @@ function Card({ project, index, range, targetScale }: any) {
                     <motion.div style={{ scale: imageScale }} className="w-full h-full">
                         <BlurFade delay={0.2} inView>
                             <img
-                                src={project.image}
-                                alt={project.title}
+                                src={playlist.thumbnail}
+                                alt={playlist.title}
                                 className="w-full h-full object-cover"
                             />
                         </BlurFade>
@@ -104,6 +74,26 @@ export function Work() {
         target: container,
         offset: ['start start', 'end end']
     })
+    const [playlists, setPlaylists] = useState<Playlist[]>([])
+    const [isLoading, setIsLoading] = useState(true)
+
+    useEffect(() => {
+        fetchPlaylists()
+    }, [])
+
+    const fetchPlaylists = async () => {
+        try {
+            const response = await fetch('/api/playlists')
+            const result = await response.json()
+            if (result.success) {
+                setPlaylists(result.data || [])
+            }
+        } catch (error) {
+            console.error('Error fetching playlists:', error)
+        } finally {
+            setIsLoading(false)
+        }
+    }
 
     return (
         <section ref={container} className="relative bg-background">
@@ -115,24 +105,34 @@ export function Work() {
                         <ShinyText>Selected Work</ShinyText>
                     </h2>
                     <p className="text-xl text-muted-foreground max-w-2xl">
-                        A collection of projects that define my style and approach to video editing.
+                        A collection of playlists that define my style and approach to video editing.
                     </p>
                 </div>
 
-                <div className="flex flex-col gap-10">
-                    {projects.map((project, i) => {
-                        const targetScale = 1 - ((projects.length - i) * 0.05)
-                        return (
-                            <Card
-                                key={i}
-                                index={i}
-                                project={project}
-                                range={scrollYProgress}
-                                targetScale={targetScale}
-                            />
-                        )
-                    })}
-                </div>
+                {isLoading ? (
+                    <div className="text-center py-20">
+                        <p className="text-muted-foreground">Loading playlists...</p>
+                    </div>
+                ) : playlists.length === 0 ? (
+                    <div className="text-center py-20">
+                        <p className="text-muted-foreground">No playlists available yet.</p>
+                    </div>
+                ) : (
+                    <div className="flex flex-col gap-10">
+                        {playlists.map((playlist, i) => {
+                            const targetScale = 1 - ((playlists.length - i) * 0.05)
+                            return (
+                                <Card
+                                    key={playlist.id}
+                                    index={i}
+                                    playlist={playlist}
+                                    range={scrollYProgress}
+                                    targetScale={targetScale}
+                                />
+                            )
+                        })}
+                    </div>
+                )}
             </Container>
         </section>
     )

@@ -80,10 +80,10 @@ export function Toolkit() {
     return (
         <section className="py-20 bg-background overflow-hidden">
             <Container className="mb-12">
-                <h2 className="text-3xl md:text-5xl font-bold text-center mb-4">
+                <h2 className="text-4xl md:text-6xl font-bold text-center mb-4">
                     <ShinyText>My Toolkit</ShinyText>
                 </h2>
-                <p className="text-center text-muted-foreground max-w-2xl mx-auto">
+                <p className="text-center text-muted-foreground max-w-2xl mx-auto text-lg">
                     The software and hardware I use to bring stories to life.
                 </p>
             </Container>
@@ -98,7 +98,7 @@ export function Toolkit() {
                         {allTools.map((tool, i) => (
                             <motion.div
                                 key={i}
-                                whileHover={{ scale: 1.2, color: "#fff" }}
+                                whileHover={{ scale: 1.2 }}
                                 transition={{ type: "spring", stiffness: 300 }}
                                 className="flex flex-col items-center gap-4 text-muted-foreground hover:text-foreground cursor-pointer"
                             >

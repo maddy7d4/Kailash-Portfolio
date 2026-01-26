@@ -55,7 +55,7 @@ export function Process() {
                                 className="relative"
                             >
                                 <MagicCard className="p-8 md:p-12 flex flex-col gap-4 items-start" gradientColor="#262626">
-                                    <div className="text-4xl md:text-6xl font-bold text-muted-foreground/20">
+                                    <div className="text-4xl md:text-6xl font-bold text-muted-foreground/30 dark:text-muted-foreground/20">
                                         {step.number}
                                     </div>
                                     <h3 className="text-2xl md:text-3xl font-bold">{step.title}</h3>

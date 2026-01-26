@@ -1,13 +1,11 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { motion, useScroll, useMotionValueEvent } from "framer-motion"
 import Link from "next/link"
 import { Container } from "@/components/ui/container"
 import { ThemeToggle } from "@/components/ui/theme-toggle"
 import { Magnetic } from "@/components/ui/magnetic"
-import { useScrollSound } from "@/hooks/use-scroll-sound"
-import { Volume2, VolumeX } from "lucide-react"
 
 const navLinks = [
     { name: "Work", href: "#work" },
@@ -20,7 +18,6 @@ const navLinks = [
 export function Header() {
     const { scrollY } = useScroll()
     const [hidden, setHidden] = useState(false)
-    const { isMuted, toggleMute } = useScrollSound()
 
     useMotionValueEvent(scrollY, "change", (latest) => {
         const previous = scrollY.getPrevious() ?? 0
@@ -61,14 +58,7 @@ export function Header() {
                     </nav>
 
                     <div className="flex items-center gap-2 px-2">
-                        <button
-                            onClick={toggleMute}
-                            className="p-2 rounded-full hover:bg-secondary transition-colors"
-                            aria-label={isMuted ? "Unmute scroll sound" : "Mute scroll sound"}
-                        >
-                            {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
-                        </button>
-                        {/* <ThemeToggle /> */}
+                        <ThemeToggle />
                     </div>
                 </div>
             </Container>

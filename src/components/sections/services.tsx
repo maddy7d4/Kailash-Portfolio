@@ -33,7 +33,7 @@ const services = [
 
 export function Services() {
     return (
-        <section id="services" className="py-32 bg-secondary/30 relative overflow-hidden">
+        <section id="services" className="py-32 bg-background relative overflow-hidden">
             <SoundTrigger profile="services" />
             <ServicesScene />
             <Container>
@@ -48,7 +48,7 @@ export function Services() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {services.map((service, i) => (
-                        <SpotlightCard key={i} className="bg-background/50 backdrop-blur-sm border-white/5">
+                        <SpotlightCard key={i} className="bg-background border border-border shadow-sm hover:shadow-md transition-shadow">
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
@@ -56,9 +56,9 @@ export function Services() {
                                 className="relative z-20 p-8 h-full w-full"
                             >
                                 <div className="mb-6 p-4 rounded-full bg-secondary w-fit group-hover:bg-primary/20 group-hover:text-primary transition-colors">
-                                    <service.icon className="w-8 h-8" />
+                                    <service.icon className="w-8 h-8 text-foreground" />
                                 </div>
-                                <h3 className="text-xl font-bold mb-4">{service.title}</h3>
+                                <h3 className="text-xl font-bold mb-4 text-foreground">{service.title}</h3>
                                 <p className="text-muted-foreground">{service.description}</p>
                             </motion.div>
                         </SpotlightCard>

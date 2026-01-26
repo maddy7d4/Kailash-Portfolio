@@ -6,7 +6,7 @@
   --primary: #7c3aed;
   --secondary: #f4f4f5;
   --accent: #06b6d4;
-  --muted: #71717a;
+  --muted: #52525b;
   --border: #e4e4e7;
 }
 
@@ -30,6 +30,13 @@
   --color-border: var(--border);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --shiny-gradient: linear-gradient(120deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.8) 50%, rgba(0, 0, 0, 0) 60%);
+  --shiny-text-color: var(--muted);
+}
+
+.dark {
+  --shiny-gradient: linear-gradient(120deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0) 60%);
+  --shiny-text-color: rgba(181, 181, 181, 0.64);
 }
 
 body {

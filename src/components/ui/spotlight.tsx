@@ -88,7 +88,7 @@ export function SpotlightCard({
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             className={cn(
-                "relative flex h-full w-full items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-zinc-900 text-slate-200",
+                "relative flex h-full w-full items-center justify-center overflow-hidden rounded-xl border border-border bg-background text-foreground",
                 className
             )}
         >

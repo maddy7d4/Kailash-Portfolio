@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion"
 import { Container } from "@/components/ui/container"
 import { TiltCard } from "@/components/ui/tilt-card"
 import { BlurFade } from "@/components/ui/blur-fade"
+import { ShinyText } from "@/components/ui/shiny-text"
 import { SoundTrigger } from "@/components/ui/sound-trigger"
 import { useRef } from "react"
 
@@ -41,10 +42,10 @@ export function About() {
                             transition={{ duration: 0.8 }}
                             className="text-4xl md:text-6xl font-bold mb-8"
                         >
-                            About Me
+                            <ShinyText>About Me</ShinyText>
                         </motion.h2>
 
-                        <div className="space-y-6 text-lg text-muted-foreground">
+                        <div className="space-y-6 text-lg text-foreground">
                             <p>
                                 I'm a passionate video editor with over 5 years of experience in crafting compelling visual narratives. My journey began with a love for cinema and has evolved into a career helping brands and creators tell their stories.
                             </p>

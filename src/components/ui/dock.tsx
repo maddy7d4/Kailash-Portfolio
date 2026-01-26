@@ -18,7 +18,7 @@ export const Dock = ({
             onMouseMove={(e) => mouseX.set(e.pageX)}
             onMouseLeave={() => mouseX.set(Infinity)}
             className={cn(
-                "mx-auto flex h-16 items-end gap-4 rounded-2xl bg-gray-50/10 px-4 pb-3 backdrop-blur-md border border-white/10",
+                "mx-auto flex h-16 items-end gap-4 rounded-2xl bg-secondary/50 dark:bg-gray-50/10 px-4 pb-3 backdrop-blur-md border border-border",
                 className
             )}
         >
@@ -66,7 +66,7 @@ function IconContainer({
             <motion.div
                 ref={ref}
                 style={{ width, height }}
-                className="aspect-square rounded-full bg-gray-200/20 flex items-center justify-center relative group"
+                className="aspect-square rounded-full bg-secondary dark:bg-gray-200/20 flex items-center justify-center relative group"
             >
                 <span className="absolute -top-8 left-1/2 -translate-x-1/2 w-auto px-2 py-1 rounded bg-black/80 text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                     {title}
