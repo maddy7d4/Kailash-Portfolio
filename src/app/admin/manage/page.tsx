@@ -10,6 +10,7 @@ import { Star, Edit2, Trash2, Plus, X, Save, Loader2, MessageSquare, Play, Video
 import Link from "next/link"
 import type { Feedback, Playlist, Video as VideoType } from "@/lib/db"
 import { ImageUpload } from "@/components/ui/image-upload"
+import { LazyImage } from "@/components/ui/lazy-image"
 
 type Tab = 'feedback' | 'playlists'
 
@@ -819,11 +820,13 @@ function PlaylistManagement() {
                                 }`}
                             >
                                 <div className="flex items-center gap-3">
-                                    <img
-                                        src={playlist.thumbnail}
-                                        alt={playlist.title}
-                                        className="w-14 h-14 sm:w-16 sm:h-16 rounded object-cover flex-shrink-0"
-                                    />
+                                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded overflow-hidden flex-shrink-0">
+                                        <LazyImage
+                                            src={playlist.thumbnail}
+                                            alt={playlist.title}
+                                            className="object-cover"
+                                        />
+                                    </div>
                                     <div className="flex-1 min-w-0">
                                         <h4 className="font-medium text-sm leading-tight line-clamp-2">{playlist.title}</h4>
                                         <p className="text-xs text-muted-foreground mt-1">
@@ -980,10 +983,10 @@ function PlaylistManagement() {
                                             className="rounded-lg overflow-hidden bg-background/50 backdrop-blur-sm border border-white/10"
                                         >
                                             <div className="relative aspect-video">
-                                                <img
+                                                <LazyImage
                                                     src={video.thumbnail}
                                                     alt={video.title}
-                                                    className="w-full h-full object-cover"
+                                                    className="object-cover"
                                                 />
                                                 <div className="absolute top-2 right-2 flex gap-1">
                                                     <motion.button

@@ -3,6 +3,7 @@
 import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { Container } from "@/components/ui/container"
+import { LazyImage } from "@/components/ui/lazy-image"
 
 const images = [
     "https://images.unsplash.com/photo-1536240478700-b869070f9279?q=80&w=1000&auto=format&fit=crop",
@@ -33,28 +34,28 @@ export function ParallaxGallery() {
             <div className="h-[800px] flex gap-8 justify-center overflow-hidden">
                 <motion.div style={{ y: y1 }} className="flex flex-col gap-8 w-1/4">
                     <div className="h-[400px] rounded-2xl overflow-hidden">
-                        <img src={images[0]} className="w-full h-full object-cover" alt="" />
+                        <LazyImage src={images[0]} alt="" className="object-cover" />
                     </div>
                     <div className="h-[400px] rounded-2xl overflow-hidden">
-                        <img src={images[1]} className="w-full h-full object-cover" alt="" />
+                        <LazyImage src={images[1]} alt="" className="object-cover" />
                     </div>
                 </motion.div>
 
                 <motion.div style={{ y: y2 }} className="flex flex-col gap-8 w-1/4 pt-20">
                     <div className="h-[400px] rounded-2xl overflow-hidden">
-                        <img src={images[2]} className="w-full h-full object-cover" alt="" />
+                        <LazyImage src={images[2]} alt="" className="object-cover" />
                     </div>
                     <div className="h-[400px] rounded-2xl overflow-hidden">
-                        <img src={images[3]} className="w-full h-full object-cover" alt="" />
+                        <LazyImage src={images[3]} alt="" className="object-cover" />
                     </div>
                 </motion.div>
 
                 <motion.div style={{ y: y3 }} className="flex flex-col gap-8 w-1/4">
                     <div className="h-[400px] rounded-2xl overflow-hidden">
-                        <img src={images[4]} className="w-full h-full object-cover" alt="" />
+                        <LazyImage src={images[4]} alt="" className="object-cover" />
                     </div>
                     <div className="h-[400px] rounded-2xl overflow-hidden">
-                        <img src={images[5]} className="w-full h-full object-cover" alt="" />
+                        <LazyImage src={images[5]} alt="" className="object-cover" />
                     </div>
                 </motion.div>
             </div>

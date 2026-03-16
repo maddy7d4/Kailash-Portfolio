@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion"
 import { Container } from "@/components/ui/container"
 import { TiltCard } from "@/components/ui/tilt-card"
 import { BlurFade } from "@/components/ui/blur-fade"
+import { LazyImage } from "@/components/ui/lazy-image"
 import { ShinyText } from "@/components/ui/shiny-text"
 import { SoundTrigger } from "@/components/ui/sound-trigger"
 import { useRef } from "react"
@@ -24,13 +25,11 @@ export function About() {
                     <div className="w-full md:w-1/2">
                         <TiltCard className="w-full h-[300px] sm:h-[400px] md:h-[500px] bg-gradient-to-br from-primary/20 to-accent/20">
                             <div className="relative w-full h-full rounded-xl overflow-hidden">
-                                <BlurFade delay={0.2} inView>
-                                    <img
-                                        src="/kailas_profile.JPG"
-                                        alt="Kailas"
-                                        className="w-full h-full object-cover object-top"
-                                    />
-                                </BlurFade>
+                                <LazyImage
+                                    src="/kailas_profile.JPG"
+                                    alt="Kailas"
+                                    className="object-cover object-top"
+                                />
                             </div>
                         </TiltCard>
                     </div>

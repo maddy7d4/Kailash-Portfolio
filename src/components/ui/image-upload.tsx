@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react"
 import { Upload, Link, X, Loader2, ImageIcon } from "lucide-react"
+import { LazyImage } from "@/components/ui/lazy-image"
 
 interface ImageUploadProps {
     value: string
@@ -173,7 +174,7 @@ export function ImageUpload({ value, onChange, placeholder = "https://...", labe
             {/* Preview */}
             {value && (
                 <div className="relative w-20 h-20 rounded-lg overflow-hidden border border-white/10">
-                    <img src={value} alt="Preview" className="w-full h-full object-cover" />
+                    <LazyImage src={value} alt="Preview" />
                     <button
                         type="button"
                         onClick={() => onChange('')}

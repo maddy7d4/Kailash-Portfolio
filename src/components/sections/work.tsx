@@ -8,6 +8,7 @@ import Link from "next/link"
 import { BorderBeam } from "@/components/ui/border-beam"
 import { ShinyText } from "@/components/ui/shiny-text"
 import { BlurFade } from "@/components/ui/blur-fade"
+import { LazyImage } from "@/components/ui/lazy-image"
 import { BackgroundBeams } from "@/components/ui/background-beams"
 import { SoundTrigger } from "@/components/ui/sound-trigger"
 import type { Playlist } from "@/lib/db"
@@ -58,13 +59,11 @@ function Card({ playlist, index, range, targetScale }: { playlist: Playlist; ind
 
                 <div className="absolute inset-0 overflow-hidden rounded-2xl sm:rounded-3xl opacity-60">
                     <motion.div style={{ scale: imageScale }} className="w-full h-full">
-                        <BlurFade delay={0.2} inView>
-                            <img
-                                src={playlist.thumbnail}
-                                alt={playlist.title}
-                                className="w-full h-full object-cover"
-                            />
-                        </BlurFade>
+                        <LazyImage
+                            src={playlist.thumbnail}
+                            alt={playlist.title}
+                            className="object-cover"
+                        />
                     </motion.div>
                 </div>
             </motion.div>

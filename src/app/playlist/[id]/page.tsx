@@ -10,6 +10,7 @@ import { ArrowLeft, Play, ExternalLink } from "lucide-react"
 import Link from "next/link"
 import { useParams } from "next/navigation"
 import type { Playlist } from "@/lib/db"
+import { LazyImage } from "@/components/ui/lazy-image"
 
 export default function PlaylistPage() {
     const params = useParams()
@@ -87,10 +88,10 @@ export default function PlaylistPage() {
                         <>
                             <div className="mb-12">
                                 <div className="relative w-full h-[400px] rounded-2xl overflow-hidden mb-6">
-                                    <img
+                                    <LazyImage
                                         src={playlist.thumbnail}
                                         alt={playlist.title}
-                                        className="w-full h-full object-cover"
+                                        className="object-cover"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/50 to-transparent" />
                                     <div className="absolute bottom-0 left-0 right-0 p-8">
@@ -119,10 +120,10 @@ export default function PlaylistPage() {
                                             className="rounded-lg overflow-hidden bg-background/50 backdrop-blur-sm border border-white/10 hover:border-primary/50 transition-colors group"
                                         >
                                             <div className="relative aspect-video">
-                                                <img
+                                                <LazyImage
                                                     src={video.thumbnail}
                                                     alt={video.title}
-                                                    className="w-full h-full object-cover"
+                                                    className="object-cover"
                                                 />
                                                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
                                                     <motion.a
