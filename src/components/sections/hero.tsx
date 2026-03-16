@@ -7,7 +7,6 @@ import { TextReveal } from "@/components/ui/text-reveal"
 import { Magnetic } from "@/components/ui/magnetic"
 import { Particles } from "@/components/ui/particles"
 import { TextScramble } from "@/components/ui/text-scramble"
-import { HoverBorderGradient } from "@/components/ui/hover-border-gradient"
 import { FlipWords } from "@/components/ui/flip-words"
 import { SoundTrigger } from "@/components/ui/sound-trigger"
 import { HeroScene } from "@/components/3d/hero-scene"
@@ -65,18 +64,9 @@ export function Hero() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
                 >
-                    <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mb-10">
+                    <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl">
                         Crafting visual stories that captivate and inspire.
                     </p>
-
-                    <HoverBorderGradient
-                        containerClassName="rounded-full"
-                        as="button"
-                        className="dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2"
-                    >
-                        <span>View Work</span>
-                        <ArrowDown className="w-4 h-4" />
-                    </HoverBorderGradient>
                 </motion.div>
             </Container>
 

@@ -68,7 +68,7 @@ export const TiltCard = ({
                     transform: "translateZ(75px)",
                     transformStyle: "preserve-3d",
                 }}
-                className="absolute inset-4 grid place-content-center rounded-xl bg-white shadow-lg"
+                className="absolute inset-0 rounded-xl overflow-hidden"
             >
                 {children}
             </div>

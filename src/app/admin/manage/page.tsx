@@ -9,6 +9,7 @@ import { Meteors } from "@/components/ui/meteors"
 import { Star, Edit2, Trash2, Plus, X, Save, Loader2, MessageSquare, Play, Video } from "lucide-react"
 import Link from "next/link"
 import type { Feedback, Playlist, Video as VideoType } from "@/lib/db"
+import { ImageUpload } from "@/components/ui/image-upload"
 
 type Tab = 'feedback' | 'playlists'
 
@@ -16,7 +17,7 @@ export default function AdminManagePage() {
     const [activeTab, setActiveTab] = useState<Tab>('feedback')
     
     return (
-        <section className="relative min-h-screen py-32 bg-background overflow-hidden">
+        <section className="relative min-h-screen py-20 sm:py-32 bg-background overflow-hidden">
             <Particles
                 className="absolute inset-0 z-10"
                 quantity={100}
@@ -45,46 +46,46 @@ export default function AdminManagePage() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
                 >
-                    <div className="flex justify-between items-center mb-8">
+                    <div className="flex flex-wrap justify-between items-start gap-4 mb-8">
                         <div>
-                            <h1 className="text-4xl md:text-6xl font-bold mb-2">
+                            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-2">
                                 <ShinyText>Admin Panel</ShinyText>
                             </h1>
-                            <p className="text-muted-foreground">Manage feedback and playlists</p>
+                            <p className="text-muted-foreground text-sm sm:text-base">Manage feedback and playlists</p>
                         </div>
                         <Link
                             href="/"
-                            className="px-4 py-2 rounded-lg bg-secondary hover:bg-primary hover:text-white transition-colors"
+                            className="shrink-0 px-4 py-2 rounded-lg bg-secondary hover:bg-primary hover:text-white transition-colors text-sm"
                         >
                             Back to Home
                         </Link>
                     </div>
 
                     {/* Tabs */}
-                    <div className="flex gap-4 mb-8 border-b border-white/10">
+                    <div className="flex gap-1 sm:gap-4 mb-8 border-b border-white/10 overflow-x-auto">
                         <button
                             onClick={() => setActiveTab('feedback')}
-                            className={`px-6 py-3 font-medium transition-colors border-b-2 ${
+                            className={`shrink-0 px-4 sm:px-6 py-3 text-sm sm:text-base font-medium transition-colors border-b-2 ${
                                 activeTab === 'feedback'
                                     ? 'border-primary text-primary'
                                     : 'border-transparent text-muted-foreground hover:text-foreground'
                             }`}
                         >
                             <div className="flex items-center gap-2">
-                                <MessageSquare className="w-5 h-5" />
+                                <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5" />
                                 Feedback
                             </div>
                         </button>
                         <button
                             onClick={() => setActiveTab('playlists')}
-                            className={`px-6 py-3 font-medium transition-colors border-b-2 ${
+                            className={`shrink-0 px-4 sm:px-6 py-3 text-sm sm:text-base font-medium transition-colors border-b-2 ${
                                 activeTab === 'playlists'
                                     ? 'border-primary text-primary'
                                     : 'border-transparent text-muted-foreground hover:text-foreground'
                             }`}
                         >
                             <div className="flex items-center gap-2">
-                                <Play className="w-5 h-5" />
+                                <Play className="w-4 h-4 sm:w-5 sm:h-5" />
                                 Playlists
                             </div>
                         </button>
@@ -281,8 +282,8 @@ function FeedbackManagement() {
                     animate={{ opacity: 1, y: 0 }}
                     className="mb-8 p-6 rounded-2xl bg-background/50 backdrop-blur-sm border border-white/10"
                 >
-                    <div className="flex justify-between items-center mb-6">
-                        <h2 className="text-2xl font-bold">
+                    <div className="flex flex-wrap justify-between items-center gap-3 mb-6">
+                        <h2 className="text-xl sm:text-2xl font-bold">
                             {isAdding ? 'Add New Feedback' : 'Edit Feedback'}
                         </h2>
                         <button
@@ -395,19 +396,19 @@ function FeedbackManagement() {
                             />
                         </div>
 
-                        <div className="flex gap-4">
+                        <div className="flex flex-wrap gap-3">
                             <motion.button
                                 onClick={handleSave}
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="px-6 py-2 rounded-lg bg-primary text-white flex items-center gap-2 hover:bg-primary/90 transition-colors"
+                                className="flex-1 sm:flex-none px-6 py-2 rounded-lg bg-primary text-white flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors"
                             >
                                 <Save className="w-4 h-4" />
                                 Save
                             </motion.button>
                             <button
                                 onClick={cancelEdit}
-                                className="px-6 py-2 rounded-lg bg-secondary hover:bg-secondary/80 transition-colors"
+                                className="flex-1 sm:flex-none px-6 py-2 rounded-lg bg-secondary hover:bg-secondary/80 transition-colors"
                             >
                                 Cancel
                             </button>
@@ -729,12 +730,12 @@ function PlaylistManagement() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
             transition={{ duration: 0.3 }}
-            className="grid grid-cols-1 lg:grid-cols-3 gap-6"
+            className="grid grid-cols-1 md:grid-cols-3 gap-6"
         >
             {/* Playlists Sidebar (YouTube-like) */}
             <div className="lg:col-span-1 space-y-4">
                 <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-2xl font-bold">Playlists</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold">Playlists</h2>
                     {!isAddingPlaylist && !editingPlaylistId && (
                         <motion.button
                             onClick={startAddPlaylist}
@@ -768,29 +769,28 @@ function PlaylistManagement() {
                                 placeholder="Playlist Title"
                                 className="w-full px-3 py-2 rounded-lg bg-background/50 backdrop-blur-sm border border-white/10 focus:border-primary focus:outline-none transition-colors text-sm"
                             />
-                            <input
-                                type="text"
-                                name="thumbnail"
+                            <ImageUpload
                                 value={playlistFormData.thumbnail}
-                                onChange={handlePlaylistInputChange}
+                                onChange={(url) => setPlaylistFormData(prev => ({ ...prev, thumbnail: url }))}
                                 placeholder="Thumbnail URL"
-                                className="w-full px-3 py-2 rounded-lg bg-background/50 backdrop-blur-sm border border-white/10 focus:border-primary focus:outline-none transition-colors text-sm"
                             />
                             <div className="flex gap-2">
                                 <motion.button
                                     onClick={handleSavePlaylist}
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="flex-1 px-3 py-2 rounded-lg bg-primary text-white text-sm hover:bg-primary/90"
+                                    className="flex-1 px-3 py-2 rounded-lg bg-primary text-white text-sm hover:bg-primary/90 text-center"
                                 >
                                     Save
                                 </motion.button>
-                                <button
+                                <motion.button
                                     onClick={cancelPlaylistEdit}
-                                    className="px-3 py-2 rounded-lg bg-secondary text-sm hover:bg-secondary/80"
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    className="flex-1 px-3 py-2 rounded-lg bg-secondary text-sm hover:bg-secondary/80 text-center"
                                 >
                                     Cancel
-                                </button>
+                                </motion.button>
                             </div>
                         </div>
                     </motion.div>
@@ -805,7 +805,7 @@ function PlaylistManagement() {
                         <p className="text-muted-foreground text-sm">No playlists yet.</p>
                     </div>
                 ) : (
-                    <div className="space-y-2 max-h-[600px] overflow-y-auto">
+                    <div className="space-y-2 max-h-[400px] md:max-h-[600px] overflow-y-auto pr-1">
                         {playlists.map((playlist) => (
                             <motion.div
                                 key={playlist.id}
@@ -818,19 +818,19 @@ function PlaylistManagement() {
                                         : 'bg-background/50 backdrop-blur-sm border border-white/10 hover:bg-background/70'
                                 }`}
                             >
-                                <div className="flex gap-3">
+                                <div className="flex items-center gap-3">
                                     <img
                                         src={playlist.thumbnail}
                                         alt={playlist.title}
-                                        className="w-16 h-16 rounded object-cover flex-shrink-0"
+                                        className="w-14 h-14 sm:w-16 sm:h-16 rounded object-cover flex-shrink-0"
                                     />
                                     <div className="flex-1 min-w-0">
-                                        <h4 className="font-medium text-sm truncate">{playlist.title}</h4>
+                                        <h4 className="font-medium text-sm leading-tight line-clamp-2">{playlist.title}</h4>
                                         <p className="text-xs text-muted-foreground mt-1">
                                             {playlist.videos.length} video{playlist.videos.length !== 1 ? 's' : ''}
                                         </p>
                                     </div>
-                                    <div className="flex flex-col gap-1">
+                                    <div className="flex flex-col gap-1 flex-shrink-0">
                                         <motion.button
                                             onClick={(e) => {
                                                 e.stopPropagation()
@@ -838,9 +838,9 @@ function PlaylistManagement() {
                                             }}
                                             whileHover={{ scale: 1.1 }}
                                             whileTap={{ scale: 0.9 }}
-                                            className="p-1 rounded hover:bg-secondary"
+                                            className="p-2 rounded hover:bg-secondary transition-colors"
                                         >
-                                            <Edit2 className="w-3 h-3" />
+                                            <Edit2 className="w-4 h-4" />
                                         </motion.button>
                                         <motion.button
                                             onClick={(e) => {
@@ -849,13 +849,13 @@ function PlaylistManagement() {
                                             }}
                                             whileHover={{ scale: 1.1 }}
                                             whileTap={{ scale: 0.9 }}
-                                            className="p-1 rounded hover:bg-red-500/20"
+                                            className="p-2 rounded hover:bg-red-500/20 transition-colors"
                                             disabled={isDeletingPlaylist === playlist.id}
                                         >
                                             {isDeletingPlaylist === playlist.id ? (
-                                                <Loader2 className="w-3 h-3 animate-spin" />
+                                                <Loader2 className="w-4 h-4 animate-spin" />
                                             ) : (
-                                                <Trash2 className="w-3 h-3" />
+                                                <Trash2 className="w-4 h-4" />
                                             )}
                                         </motion.button>
                                     </div>
@@ -867,12 +867,12 @@ function PlaylistManagement() {
             </div>
 
             {/* Videos Content Area (YouTube-like) */}
-            <div className="lg:col-span-2">
+            <div className="md:col-span-2">
                 {selectedPlaylist ? (
                     <div>
-                        <div className="flex justify-between items-center mb-4">
+                        <div className="flex flex-wrap justify-between items-start gap-3 mb-4">
                             <div>
-                                <h2 className="text-2xl font-bold">{selectedPlaylist.title}</h2>
+                                <h2 className="text-xl sm:text-2xl font-bold">{selectedPlaylist.title}</h2>
                                 <p className="text-sm text-muted-foreground">
                                     {selectedPlaylist.videos.length} video{selectedPlaylist.videos.length !== 1 ? 's' : ''}
                                 </p>
@@ -882,7 +882,7 @@ function PlaylistManagement() {
                                     onClick={() => startAddVideo(selectedPlaylist.id)}
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
-                                    className="px-4 py-2 rounded-lg bg-primary text-white flex items-center gap-2 hover:bg-primary/90 transition-colors"
+                                    className="shrink-0 px-4 py-2 rounded-lg bg-primary text-white flex items-center gap-2 hover:bg-primary/90 transition-colors text-sm"
                                 >
                                     <Plus className="w-4 h-4" />
                                     Add Video
@@ -896,8 +896,8 @@ function PlaylistManagement() {
                                 animate={{ opacity: 1, y: 0 }}
                                 className="mb-6 p-6 rounded-2xl bg-background/50 backdrop-blur-sm border border-white/10"
                             >
-                                <div className="flex justify-between items-center mb-4">
-                                    <h3 className="text-xl font-bold">
+                                <div className="flex flex-wrap justify-between items-center gap-3 mb-4">
+                                    <h3 className="text-lg sm:text-xl font-bold">
                                         {isAddingVideo ? 'Add Video' : 'Edit Video'}
                                     </h3>
                                     <button onClick={cancelVideoEdit} className="p-2 rounded-lg hover:bg-secondary">
@@ -926,13 +926,11 @@ function PlaylistManagement() {
                                         />
                                     </div>
                                     <div>
-                                        <label className="block text-sm font-medium mb-2">Thumbnail *</label>
-                                        <input
-                                            type="text"
-                                            name="thumbnail"
+                                        <ImageUpload
+                                            label="Thumbnail"
+                                            required
                                             value={videoFormData.thumbnail}
-                                            onChange={handleVideoInputChange}
-                                            className="w-full px-4 py-2 rounded-lg bg-background/50 backdrop-blur-sm border border-white/10 focus:border-primary focus:outline-none transition-colors"
+                                            onChange={(url) => setVideoFormData(prev => ({ ...prev, thumbnail: url }))}
                                         />
                                     </div>
                                     <div>
@@ -945,19 +943,19 @@ function PlaylistManagement() {
                                             className="w-full px-4 py-2 rounded-lg bg-background/50 backdrop-blur-sm border border-white/10 focus:border-primary focus:outline-none transition-colors resize-none"
                                         />
                                     </div>
-                                    <div className="flex gap-4">
+                                    <div className="flex flex-wrap gap-3">
                                         <motion.button
                                             onClick={handleSaveVideo}
                                             whileHover={{ scale: 1.02 }}
                                             whileTap={{ scale: 0.98 }}
-                                            className="px-6 py-2 rounded-lg bg-primary text-white flex items-center gap-2 hover:bg-primary/90"
+                                            className="flex-1 sm:flex-none px-6 py-2 rounded-lg bg-primary text-white flex items-center justify-center gap-2 hover:bg-primary/90"
                                         >
                                             <Save className="w-4 h-4" />
                                             Save
                                         </motion.button>
                                         <button
                                             onClick={cancelVideoEdit}
-                                            className="px-6 py-2 rounded-lg bg-secondary hover:bg-secondary/80"
+                                            className="flex-1 sm:flex-none px-6 py-2 rounded-lg bg-secondary hover:bg-secondary/80"
                                         >
                                             Cancel
                                         </button>
@@ -967,11 +965,11 @@ function PlaylistManagement() {
                         )}
 
                         {selectedPlaylist.videos.length === 0 ? (
-                            <div className="text-center py-12 rounded-2xl bg-background/50 backdrop-blur-sm border border-white/10">
+                            <div className="text-center py-8 sm:py-12 rounded-2xl bg-background/50 backdrop-blur-sm border border-white/10">
                                 <p className="text-muted-foreground">No videos in this playlist yet.</p>
                             </div>
                         ) : (
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <AnimatePresence>
                                     {selectedPlaylist.videos.map((video) => (
                                         <motion.div
@@ -1022,7 +1020,7 @@ function PlaylistManagement() {
                         )}
                     </div>
                 ) : (
-                    <div className="text-center py-20 rounded-2xl bg-background/50 backdrop-blur-sm border border-white/10">
+                    <div className="text-center py-10 sm:py-20 rounded-2xl bg-background/50 backdrop-blur-sm border border-white/10">
                         <Video className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
                         <p className="text-muted-foreground">Select a playlist to manage videos</p>
                     </div>

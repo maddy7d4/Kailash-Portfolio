@@ -17,18 +17,18 @@ export function About() {
     const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"])
 
     return (
-        <section id="about" ref={container} className="py-32 bg-background relative overflow-hidden">
+        <section id="about" ref={container} className="py-16 sm:py-24 md:py-32 bg-background relative overflow-hidden">
             <SoundTrigger profile="about" />
             <Container>
-                <div className="flex flex-col md:flex-row items-center gap-16">
+                <div className="flex flex-col md:flex-row items-center gap-8 sm:gap-12 md:gap-16">
                     <div className="w-full md:w-1/2">
-                        <TiltCard className="w-full h-[500px] bg-gradient-to-br from-primary/20 to-accent/20">
+                        <TiltCard className="w-full h-[300px] sm:h-[400px] md:h-[500px] bg-gradient-to-br from-primary/20 to-accent/20">
                             <div className="relative w-full h-full rounded-xl overflow-hidden">
                                 <BlurFade delay={0.2} inView>
                                     <img
                                         src="/kailas_profile.JPG"
                                         alt="Kailas"
-                                        className="w-full h-full object-cover"
+                                        className="w-full h-full object-cover object-top"
                                     />
                                 </BlurFade>
                             </div>
@@ -40,12 +40,12 @@ export function About() {
                             initial={{ opacity: 0, x: 20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.8 }}
-                            className="text-4xl md:text-6xl font-bold mb-8"
+                            className="text-3xl sm:text-4xl md:text-6xl font-bold mb-5 sm:mb-8"
                         >
                             <ShinyText>About Me</ShinyText>
                         </motion.h2>
 
-                        <div className="space-y-6 text-lg text-foreground">
+                        <div className="space-y-4 sm:space-y-6 text-base sm:text-lg text-foreground">
                             <p>
                                 I'm a passionate video editor with over 5 years of experience in crafting compelling visual narratives. My journey began with a love for cinema and has evolved into a career helping brands and creators tell their stories.
                             </p>
